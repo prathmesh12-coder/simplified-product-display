@@ -46,7 +46,19 @@ app.get("/", (req, res) => {
   res.send("Welcome to the backend server");
 });
 
-app.get("/api/products", async(req, res) => {
+app.get("/api/productsList", async(req, res) => {
+  try{
+    const products=await Product.find().select('productID productName brandName price');
+    res.json(products); 
+  }catch(error){
+    console.error('Error fetching products:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+  }
+);
+
+// This will return all Machhan products details available in our cloud collection 
+app.get("/api/AllProductDetails", async(req, res) => {
   try{
     const products=await Product.find();
     res.json(products); 
