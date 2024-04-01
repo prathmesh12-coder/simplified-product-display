@@ -58,7 +58,7 @@ app.get("/api/productsList", async(req, res) => {
 );
 
 // This will return all Machhan products details available in our cloud collection 
-app.get("/api/AllProductDetails", async(req, res) => {
+app.get("/api/AllProductsDetails", async(req, res) => {
   try{
     const products=await Product.find();
     res.json(products); 
