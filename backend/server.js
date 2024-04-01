@@ -1,7 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
-
 const app = express();
+const generateRandomData=require('./randomData');
 const PORT = process.env.PORT || 5000;
 
 const dbURI = "mongodb+srv://Prathmesh:prathmesh12345@cluster0.2zcanyt.mongodb.net/MachhanProductsDB?retryWrites=true&w=majority&appName=Cluster0";
@@ -25,10 +25,19 @@ const Product = mongoose.model('Product', productSchema);
 mongoose.connect(dbURI, {
   useNewUrlParser: true,
   useUnifiedTopology: true
-}).then(() => {
+}).then(async() => {
   console.log('Connected to MongoDB');
-})
 
+  //250 items were inserted to cloud collection "MachhanProducts" !! here
+
+
+  // const products=generateRandomData(250);
+  // await Product.insertMany(products);
+  // console.log('products inserted successfully');
+}).catch((err)=>{
+  console.error('MongoDB connection error:', err);
+}
+)
 
 
 // Routes
@@ -52,11 +61,14 @@ app.get("/api/products", async(req, res) => {
 app.get("/api/products/:id", async (req, res) => {
   const productId = req.params.id;
   try {
+  
     const product = await Product.findOne({ productID: productId });
     if (!product) {
       return res.status(404).json({ message: "Product not found" });
-    }
-    res.json(product);
+    }else{
+      res.json(product);
+     }
+    
   } catch (error) {
     console.error("Error fetching product:", error);
     res.status(500).json({ message: "Internal server error" });
