@@ -1,9 +1,11 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const app = express();
+// const cors= require('cors');
 const generateRandomData=require('./randomData');
+const bodyParser = require("body-parser");
 const PORT = process.env.PORT || 5000;
-
+console.log("this is 1 ");
 const dbURI = "mongodb+srv://Prathmesh:prathmesh12345@cluster0.2zcanyt.mongodb.net/MachhanProductsDB?retryWrites=true&w=majority&appName=Cluster0";
 
 
@@ -39,13 +41,14 @@ mongoose.connect(dbURI, {
 }
 )
 
+console.log('this is 2');
 
 // Routes
 
 app.get("/", (req, res) => {
   res.send("Welcome to the backend server");
 });
-
+console.log('this is 3');
 app.get("/api/productsList", async(req, res) => {
   try{
     const products=await Product.find().select('productID productName brandName price');
@@ -56,6 +59,7 @@ app.get("/api/productsList", async(req, res) => {
   }
   }
 );
+console.log('this is 4');
 
 // This will return all Machhan products details available in our cloud collection 
 app.get("/api/AllProductsDetails", async(req, res) => {
@@ -69,8 +73,10 @@ app.get("/api/AllProductsDetails", async(req, res) => {
   }
 );
 
+console.log('this is 5');
 
-app.get("/api/products/:id", async (req, res) => {
+
+app.get("/api/productsList/:id", async (req, res) => {
   const productId = req.params.id;
   try {
   
@@ -86,21 +92,27 @@ app.get("/api/products/:id", async (req, res) => {
     res.status(500).json({ message: "Internal server error" });
   }
 });
+console.log('this is 6');
 
+// app.use(cors({ origin: 'http://localhost:3000' }));
 
+app.use(bodyParser.json());
+console.log('this is 7');
 // Error handling middleware function 
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).json({ message: 'Internal server error' });
 });
-
+console.log('this is 8');
 // Handle 404 errors
 app.use((req, res, next) => {
   res.status(404).send("Page not found");
 });
+console.log('this is 9');
 
 
 //listening on the port
 app.listen(PORT,()=>{
   console.log(`Server is listening at port : ${PORT}`);
 })
+console.log('this is 10');
