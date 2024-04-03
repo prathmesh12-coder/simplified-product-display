@@ -67,6 +67,9 @@ The backend server will be running on [https://localhost:5000](http://localhost:
 ![frontend_screenshot.png](https://github.com/prathmesh12-coder/simplified-product-display/blob/main/images/frontend-1.png)
 ![frontend_screenshot.png](https://github.com/prathmesh12-coder/simplified-product-display/blob/main/images/frontend-2.png)
 ![frontend_screenshot.png](https://github.com/prathmesh12-coder/simplified-product-display/blob/main/images/frontend-3.png)
+![frontend_screenshot.png](https://github.com/prathmesh12-coder/simplified-product-display/blob/main/images/backend-1.png)
+![frontend_screenshot.png](https://github.com/prathmesh12-coder/simplified-product-display/blob/main/images/backend-2.png)
+![frontend_screenshot.png](https://github.com/prathmesh12-coder/simplified-product-display/blob/main/images/database.png)
 
 ## Future Improvements
 - Implement user authentication and authorization for secure access.
