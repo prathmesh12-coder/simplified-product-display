@@ -1,0 +1,33 @@
+.container{
+    background-color: antiquewhite;
+}
+
+
+.page-heading{
+    
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    margin: 40px;
+}
+
+    
+.overall-card{
+    
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+
+}
+
+.overall-card-image{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+}
+.overall-card-body{
+    border-left: 1px solid black;
+    flex: 1;
+}
+

@@ -3,17 +3,14 @@ import { BrowserRouter as Router, Routes,Route } from 'react-router-dom';
 import LandingPage from './components/landingPage/LandingPage';
 import ProductList from './components/productList/ProductList';
 import ProductDetails from './components/productDetails/ProductDetails';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './App.css';
 
 
 function App() {
   return (
     <Router>
       <div className="App">
-        <header className="App-header">
-          {/* Header content goes here */
-           <h4>This is heading !!</h4>
-          }
-        </header>
         <main>
         <Routes>
             <Route exact path="/" element={<LandingPage />} />
@@ -22,10 +19,8 @@ function App() {
           </Routes>
         </main>
         <footer>
-          {/* Footer content goes here */
-            <h5>This is footer !!!</h5>
-          }
-        </footer>
+        <p>&copy; 2024 Machhan Products. All rights reserved.</p>
+      </footer>
       </div>
     </Router>
   );
