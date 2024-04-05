@@ -21,8 +21,7 @@ function App() {
             <Route path="/products/:id/barcode" element={<BarcodePage />} />
             <Route path="/barcodeScanner" element={<BarcodeScanner />} />
             <Route path="*" element={<NotFoundPage />} />
-            
-          </Routes>
+        </Routes>
         </main>
         <footer>
         <p>&copy; 2024 Machhan Products. All rights reserved.</p>

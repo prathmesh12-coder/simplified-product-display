@@ -1,16 +1,9 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const app = express();
-const generateRandomData=require('./randomData');
-const bodyParser = require("body-parser");
+// const generateRandomData=require('./randomDataGenerator.js');
 const generateBarcode=require('./barcodeGenerator.js');
 const PORT = process.env.PORT || 5000;
-
-const productDetails={
-  productName:'this is shampoo',
-
-}
-
 
 
 
@@ -71,11 +64,39 @@ const fetchProductDetails = async (productId) => {
 
 // Routes
 
-app.get("/", (req, res) => {
+app.get("/", (req, res) => { //this is root directory for our backend
   res.send("Welcome to the backend server");
 });
-// Assuming you have a route to generate the barcode image data
-app.get('/api/productsList/:id/barcode', async (req, res) => {
+ 
+app.get("/api/productsList", async(req, res) => {//get all the available products in the machhan store
+  try{
+    const products=await Product.find().select('productID productName brandName price');
+    res.json(products); 
+  }catch(error){
+    console.error('Error fetching products:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+  }
+);
+
+app.get("/api/productsList/:id", async (req, res) => {//get details of the specific requested product
+  const productId = req.params.id;
+  try {
+  
+    const product = await Product.findOne({ productID: productId });
+    if (!product) {
+      return res.status(404).json({ message: "Product not found" });
+    }else{
+      res.json(product);
+     }
+    
+  } catch (error) {
+    console.error("Error fetching product:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
+
+app.get('/api/productsList/:id/barcode', async (req, res) => {//get the barcode for the requested product 
   try {
     const productId = req.params.id;
     // Fetch product details from the database or an API based on the productId
@@ -96,16 +117,7 @@ app.get('/api/productsList/:id/barcode', async (req, res) => {
   }
 });
 
-app.get("/api/productsList", async(req, res) => {
-  try{
-    const products=await Product.find().select('productID productName brandName price');
-    res.json(products); 
-  }catch(error){
-    console.error('Error fetching products:', error);
-    res.status(500).json({ message: 'Internal server error' });
-  }
-  }
-);
+
 
 
 // This will return all Machhan products details available in our cloud collection 
@@ -120,27 +132,6 @@ app.get("/api/AllProductsDetails", async(req, res) => {
   }
 );
 
-
-
-
-app.get("/api/productsList/:id", async (req, res) => {
-  const productId = req.params.id;
-  try {
-  
-    const product = await Product.findOne({ productID: productId });
-    if (!product) {
-      return res.status(404).json({ message: "Product not found" });
-    }else{
-      res.json(product);
-     }
-    
-  } catch (error) {
-    console.error("Error fetching product:", error);
-    res.status(500).json({ message: "Internal server error" });
-  }
-});
-
-// app.use(bodyParser.json());
 
 // Error handling middleware function 
 app.use((err, req, res, next) => {
