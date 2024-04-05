@@ -91,3 +91,69 @@ The backend server will be running on [https://localhost:5000](http://localhost:
 - Implement user authentication and authorization for secure access.
 - Add functionality for users to add products to their cart and make purchases.
 - Enhance the design with more interactive features and animations.
+- implement barcodeScanner to scan the products to directly add to the cart.
+- below is the reference code for using quagga API, you can also find it in the barcodeScanner.js in components section. 
+  ```sh
+ 
+    useEffect(() => {
+        if (!videoRef.current) return;
+
+        Quagga.init({
+            inputStream: {
+                name: "Live",
+                type: "LiveStream",
+                target: videoRef.current,
+                constraints: {
+                    width: 640,
+                    height: 480,
+                    facingMode: "environment", // Use the device's rear camera
+                },
+            },
+            decoder: {
+                readers: ["ean_reader"], // Specify the type of barcode to scan (EAN)
+            },
+        }, function (err) {
+            if (err) {
+                console.error("Error initializing Quagga:", err);
+                return;
+            }
+            console.log("Quagga initialized successfully");
+            Quagga.start();
+        });
+
+        Quagga.onDetected(function (result) {
+            const code = result.codeResult.code;
+            alert(`Scanned Barcode: ${code}`);
+            Quagga.stop();
+        });
+
+        return () => {
+            Quagga.stop();
+        };
+    }, [videoRef]); // Added videoRef to the dependency array
+
+    return (
+        <div>
+            <h1>This is Barcode Scanner!!</h1>
+            <video ref={videoRef} style={{ width: '100%', height: 'auto' }}></video>
+        </div>
+    );
+
+
+  ```
+  -Github repo for reference:
+  
+  Barcode Scanner (not supported for Desktop)
+  ```sh
+  https://github.com/tony-xlh/react-barcode-qrcode-scanner?tab=readme-ov-file
+  ```
+  QR Scanner
+  ```sh
+  https://github.com/chung-leong/react-barcode-detection?tab=readme-ov-file
+
+  ```
+  
+
+  
+
+  
