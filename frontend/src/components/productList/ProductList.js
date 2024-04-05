@@ -67,7 +67,7 @@ const generatePlaceholderImage = (productName) => {
                   <Link to={`/products/${product.productID}`} className="text-white">View Details</Link>
                 </Button>
                 <Button variant="info">
-                  <Link to={`/products/${product.productID}`} className="text-white">Barcode</Link>
+                  <Link to={`/products/${product.productID}/barcode`} className="text-white">Barcode</Link>
                 </Button>
                 </div>
 

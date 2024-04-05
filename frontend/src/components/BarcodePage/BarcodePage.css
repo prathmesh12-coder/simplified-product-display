@@ -1,0 +1,12 @@
+.barcode-page-container{
+    
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+}
+.barcode-page-button{
+    margin: 30px;
+}
+

@@ -3,7 +3,17 @@ const mongoose = require("mongoose");
 const app = express();
 const generateRandomData=require('./randomData');
 const bodyParser = require("body-parser");
+const generateBarcode=require('./barcodeGenerator.js');
 const PORT = process.env.PORT || 5000;
+
+const productDetails={
+  productName:'this is shampoo',
+
+}
+
+
+
+
 
 const dbURI = "mongodb+srv://Prathmesh:prathmesh12345@cluster0.2zcanyt.mongodb.net/MachhanProductsDB?retryWrites=true&w=majority&appName=Cluster0";
 
@@ -40,10 +50,50 @@ mongoose.connect(dbURI, {
 }
 )
 
+
+const fetchProductDetails = async (productId) => {
+  try {
+    // Implement logic to fetch product details from your database or API
+    // For example, you can use Mongoose to find the product by ID
+    const productDetails = await Product.findOne({ productID: productId }, 'productID productName price');
+
+    if (!productDetails) {
+      throw new Error('Product not found');
+    }
+    // Return the product details
+    return productDetails;
+  } catch (error) {
+    console.error('Error fetching product details:', error);
+    throw new Error('Error fetching product details');
+  }
+};
+
+
 // Routes
 
 app.get("/", (req, res) => {
   res.send("Welcome to the backend server");
+});
+// Assuming you have a route to generate the barcode image data
+app.get('/api/productsList/:id/barcode', async (req, res) => {
+  try {
+    const productId = req.params.id;
+    // Fetch product details from the database or an API based on the productId
+    const productDetails = await fetchProductDetails(productId);
+    // Generate the barcode image data
+    const barcodeImageData = await generateBarcode(productDetails);
+
+    // Convert the Buffer object to a base64-encoded string
+    const base64Image = Buffer.from(barcodeImageData).toString('base64');
+    console.log(`genereted image code for ${productDetails.productName}`,base64Image);
+    // Send the base64-encoded image data as the response
+    res.send(base64Image);
+  } catch (error) {
+    // Log any errors that occur during barcode generation
+    console.error('Error generating barcode:', error);
+    // Send an error response
+    res.status(500).json({ error: 'Error generating barcode' });
+  }
 });
 
 app.get("/api/productsList", async(req, res) => {
