@@ -71,6 +71,8 @@ The backend server will be running on [https://localhost:5000](http://localhost:
 
 ![frontend_screenshot.png](https://github.com/prathmesh12-coder/simplified-product-display/blob/main/images/frontend-3.png)
 
+![frontend_screenshot.png](https://github.com/prathmesh12-coder/simplified-product-display/blob/main/images/frontend-4.png)
+
 - **Backend**:
 ![frontend_screenshot.png](https://github.com/prathmesh12-coder/simplified-product-display/blob/main/images/backend-1.png)
 
