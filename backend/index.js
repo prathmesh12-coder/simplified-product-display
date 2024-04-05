@@ -7,7 +7,7 @@ const PORT = process.env.PORT || 5000;
 
 
 
-
+//cloud collection database URL
 const dbURI = "mongodb+srv://Prathmesh:prathmesh12345@cluster0.2zcanyt.mongodb.net/MachhanProductsDB?retryWrites=true&w=majority&appName=Cluster0";
 
 

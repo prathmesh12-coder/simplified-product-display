@@ -1,14 +1,18 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 // @ts-ignore
 import Quagga from 'quagga';
 
 const BarcodeScanner = () => {
+    const videoRef = useRef<HTMLVideoElement>(null);
+
     useEffect(() => {
+        if (!videoRef.current) return;
+
         Quagga.init({
             inputStream: {
                 name: "Live",
                 type: "LiveStream",
-                target: document.querySelector("#barcode-scanner"),
+                target: videoRef.current,
                 constraints: {
                     width: 640,
                     height: 480,
@@ -36,12 +40,12 @@ const BarcodeScanner = () => {
         return () => {
             Quagga.stop();
         };
-    }, []);
+    }, [videoRef]); // Added videoRef to the dependency array
 
     return (
         <div>
             <h1>This is Barcode Scanner!!</h1>
-            <video id="barcode-scanner" style={{ width: '100%', height: 'auto' }}></video>
+            <video ref={videoRef} style={{ width: '100%', height: 'auto' }}></video>
         </div>
     );
 };
