@@ -3,12 +3,16 @@ const mongoose = require("mongoose");
 const app = express();
 // const generateRandomData=require('./randomDataGenerator.js');
 const generateBarcode=require('./barcodeGenerator.js');
-// const cors=require('cors');
+const cors=require('cors');
 const PORT = process.env.PORT || 5000;
 
-// app.use(cors());
+const corsOptions = {
+  origin: '*',
+  methods: ['GET', 'POST', "PUT"],
+  allowedHeaders: ['Content-Type', 'auth-token'],
+};
 
-
+app.use(cors(corsOptions));
 
 //cloud collection database URL
 const dbURI = "mongodb+srv://Prathmesh:prathmesh12345@cluster0.2zcanyt.mongodb.net/MachhanProductsDB?retryWrites=true&w=majority&appName=Cluster0";
