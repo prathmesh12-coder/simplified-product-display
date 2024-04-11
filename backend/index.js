@@ -3,7 +3,10 @@ const mongoose = require("mongoose");
 const app = express();
 // const generateRandomData=require('./randomDataGenerator.js');
 const generateBarcode=require('./barcodeGenerator.js');
+// const cors=require('cors');
 const PORT = process.env.PORT || 5000;
+
+// app.use(cors());
 
 
 
@@ -60,7 +63,6 @@ const fetchProductDetails = async (productId) => {
     throw new Error('Error fetching product details');
   }
 };
-
 
 // Routes
 
