@@ -67,9 +67,7 @@ const fetchProductDetails = async (productId) => {
 app.get("/", (req, res) => { //this is root directory for our backend
   res.send("Welcome to the backend server");
 });
-app.get("/testing", (req, res) => { //this is root directory for our backend
-  res.send("this is testing page !!!!!!!");
-});
+
  
 app.get("/api/productsList", async(req, res) => {//get all the available products in the machhan store
   try{
