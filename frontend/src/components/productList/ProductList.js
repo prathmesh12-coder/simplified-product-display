@@ -14,7 +14,7 @@ function ProductList() {
       
       const fetchData = async () => {
         try {
-          const response = await axios.get('/api/productsList');
+          const response = await axios.get('https://simplified-product-display.onrender.com/api/productsList');
           
           if (!response.data) {
             

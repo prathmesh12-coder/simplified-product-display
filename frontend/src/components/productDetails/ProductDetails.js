@@ -16,7 +16,7 @@ function ProductDetails() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`/api/productsList/${id}`);
+        const response = await axios.get(`https://simplified-product-display.onrender.com/api/productsList/${id}`);
         console.log('fetched successfully !!');
   
         if (response.status !== 200) {
