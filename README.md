@@ -82,10 +82,6 @@ The backend server will be running on [https://localhost:5000](http://localhost:
 
 ![frontend_screenshot.png](https://github.com/prathmesh12-coder/simplified-product-display/blob/main/images/database.png)
 
-- **error-regarding-fetching-on-deployed-url
-
-![frontend_screenshot.png](https://github.com/prathmesh12-coder/simplified-product-display/blob/main/images/error-fetching-from-backend-on-deployed-url.png)
-
 
 ## Future Improvements
 - Implement user authentication and authorization for secure access.
